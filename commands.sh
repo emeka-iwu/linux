@@ -65,3 +65,25 @@ eval "$(ssh-agent -s)"                # Start agent
 ssh-add ~/.ssh/id_ed25519             # Add key to agent
 cat ~/.ssh/id_ed25519.pub             # Show public key
 ssh -T git@github.com                 # Test connection
+
+#! /bin/bash
+
+# Generate SSH key pair
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Start the SSH agent
+eval "$(ssh-agent -s)"
+
+# Add the SSH key to the agent
+ssh-add ~/.ssh/id_ed25519
+
+# Display the public key
+cat ~/.ssh/id_ed25519.pub
+
+# Test SSH connection to GitHub
+ssh -T git@github.com
+if [ $? -eq 1 ]; then
+  echo "Cannot connect"
+else
+  echo "Connection authenticated"
+fi
