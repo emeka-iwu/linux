@@ -59,3 +59,9 @@ gpasswd -d username groupname  #removes a user from a group
 systemctl start/restart/stop/status/disable/enable sshd/httpd  /etc/systemd/system
 ps -ef ; ps -u username 
 top -u username ..... shows process executed by user
+# SSH Setup Quick Reference
+ssh-keygen -t ed25519 -C "email"      # Generate key pair
+eval "$(ssh-agent -s)"                # Start agent
+ssh-add ~/.ssh/id_ed25519             # Add key to agent
+cat ~/.ssh/id_ed25519.pub             # Show public key
+ssh -T git@github.com                 # Test connection
