@@ -21,7 +21,7 @@ ssh-add "$sshkey"
 cat "$HOME/.ssh/id_ed25519.pub" > "$HOME/pubkey"
 
 #Test connection to Github
-ssh -T git@github.com
+ssh -T git@github.com 2>&1 | grep -i hi > /dev/null
 if [ $? -ne 0 ]; then
     echo "connection not established"
 else
