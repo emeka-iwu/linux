@@ -90,3 +90,8 @@ fi
 
 #changing hostname
 hostnamectl set-hostname newhostname
+
+chmod +t file / 1777 file #stickybit
+chmod u+s file / chmod 4777 file #setuid
+chmod g+s file / chmod 2777 file #setuid
+
