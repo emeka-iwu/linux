@@ -94,4 +94,5 @@ hostnamectl set-hostname newhostname
 chmod +t file / 1777 file #stickybit
 chmod u+s file / chmod 4777 file #setuid
 chmod g+s file / chmod 2777 file #setgid
+nohup nice -n 6 bash file.sh & # runs a script in background with nice value of 6. code will run even if terminal closes because of nohup argument 
 
