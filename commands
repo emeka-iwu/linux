@@ -97,4 +97,4 @@ chmod g+s file / chmod 2777 file #setgid
 nohup nice -n 6 bash file.sh & # runs a script in background with nice value of 6. code will run even if terminal closes because of nohup argument 
 ptrack=$(ps aux | grep [t]rack | awk '{print $2}') ; kill $ptrack #finds the pid of a process and kills it. 
 ps -eo pid,cmd,%cpu,%mem --sort=-%mem | head -3 > file #saves the top 3 mem consuiming processes to a file
-
+useradd -m -d /home/sysadm sysadm && chage -M 60 sysadm && echo "0 23 * * 5 bash /usr/bin/audit.sh" | crontab -u sysadm - && ps -eo pid,cmd,%cpu --sort=-%cpu | head -3 > /tmp/cpu_check.txtScore
