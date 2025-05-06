@@ -87,3 +87,21 @@ if [ $? -eq 1 ]; then
 else
   echo "Connection authenticated"
 fi
+
+awk -F”:” ‘$3 > 1000 {print $1,$6}’ /etc/passwd > /tmp/high_users.txt
+-F":" splits correctly, $3 > 1000 filters UIDs, $1,$6 prints username and home dir—perfect!
+
+awk -F”:” ‘$3 < 100 {print $1,$7}’ /etc/passwd | sort -k1 > /tmp/low_uids.txt
+Correct! -F":" splits on colon, $3 < 100 filters UIDs, print $1,$7 gets username and shell, sort -k1 sorts by username—perfectly executed!
+
+awk -F":" '$4>=500 && $4<=999 {print $1,$4}' /etc/passwd | sort -k2n > /tmp/mid_gids.txt #k2n sorts a numerical field.
+
+echo "0 2 * * 1 bash /opt/backup.sh" | crontab -u backupusr - && crontab -l -u backupusr
+echo “bash /usr/bin/status.sh >> /tmp/status.out” | at 8:00PM today
+
+nohup nice -n 6 bash /usr/bin/track.sh &
+
+chage -M 90 -m 7 -d 0 opsuser
+Correct! -M 90 (max 90 days), -m 7 (min 7 days), -d 0 (force change)—all applied to opsuser
+
+nohup nice -n 7 bash /usr/bin/probe.sh &; pid=$(ps aux | grep [p]robe.sh | awk '{print $2}'); kill $pid
